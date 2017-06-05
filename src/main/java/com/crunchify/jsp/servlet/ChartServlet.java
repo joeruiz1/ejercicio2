@@ -40,13 +40,14 @@ public class ChartServlet extends HttpServlet {
         DefaultPieDataset dataset = new DefaultPieDataset();
         //Crear la capa de servicios que se enlace con el DAO
         
-        for (int i = 0; i < dep.recursos().size(); i++) {
+        for (int i = 0; i < dep.service().size(); i++) {
 
-          String nom=  dep.recursos().get(i).getName_proy();
-           int num= dep.recursos().get(i).getTotal();
-            
-            dataset.setValue(nom,num);
-            
+          int nom=  dep.service().get(i).getTotal1();
+           int num= dep.service().get(i).getTotal2();
+           int nam=dep.service().get(i).getTotal3();
+            dataset.setValue("milimetros",nom);
+            dataset.setValue("temperatura", num);
+            dataset.setValue("nivel de Carga", nam);
         }
         
      

@@ -198,4 +198,60 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
         return proyectos;
     }
 
+    public List<Sensores> service() {
+        List<Sensores> servicios = null;
+
+        String query = "select avg(cantidad_milimetros) as total,avg(temperatura) as total2,avg(nivel_Carga) as total3 from sensores group by cantidad_milimetros;";
+        Connection connection = null;
+        Sensores d = null;
+        try {
+            connection = Conexion.getConnection();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(DepartamentoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            int total = 0;
+            int total2 = 0;
+            int total3 = 0;
+            int cantidad_milimetros = 0;
+            int tempe = 0;
+            int nivelCarga = 0;
+            d = new Sensores();
+            while (rs.next()) {
+                if (servicios == null) {
+                    servicios = new ArrayList<Sensores>();
+                }
+
+                cantidad_milimetros = rs.getInt("cantidad_milimetros");
+                d.setCantidad_milime(cantidad_milimetros);
+
+                total = rs.getInt("total");
+                d.setTotal1(total);
+
+                tempe = rs.getInt("temperatura");
+                d.setTemperatura(tempe);
+
+                nivelCarga = rs.getInt("nivel_Carga");
+                d.setNivelCarga(nivelCarga);
+
+                total2 = rs.getInt("total2");
+                d.setTotal2(total2);
+
+                total3 = rs.getInt("total3");
+                d.setTotal3(total3);
+
+                servicios.add(d);
+            }
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas al obtener la lista de sesores");
+            e.printStackTrace();
+        }
+        return servicios;
+    }
+
 }
