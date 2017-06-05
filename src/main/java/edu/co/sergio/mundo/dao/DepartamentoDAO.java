@@ -201,7 +201,8 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
     public List<Sensores> service() {
         List<Sensores> servicios = null;
 
-        String query = "select avg(cantidad_milimetros) as total,avg(temperatura) as total2,avg(nivel_Carga) as total3 from sensores group by cantidad_milimetros;";
+        String query = "select sum (cantidad_milimetros) as total,sum (temperatura) as total2,sum (nivel_Carga) as total3 from sensores group by cantidad_milimetros;\n" +
+"  ";
         Connection connection = null;
         Sensores d = null;
         try {
