@@ -41,13 +41,13 @@ public class ChartServlet extends HttpServlet {
 
         for (int i = 0; i < dep.service().size(); i++) {
 
-            int nom = dep.service().get(i).getCantidad_milime();
-            int num = dep.service().get(i).getTemperatura();
-            int nam = dep.service().get(i).getNivelCarga();
+            int nom = dep.service().get(i).getTotal1();
+            int num = dep.service().get(i).getTotal2();
+            int nam = dep.service().get(i).getTotal3();
 
-            dataset.setValue("milimetros", nom);
-            dataset.setValue("temperatura", num);
-            dataset.setValue("nivel de Carga", nam);
+            dataset.setValue("milimetros", nom*100);
+            dataset.setValue("temperatura", num*100);
+            dataset.setValue("nivel de Carga", nam*100);
         }
 
 //        dataset.setValue("Ford", 23.3);
